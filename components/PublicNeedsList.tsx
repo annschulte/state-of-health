@@ -69,12 +69,12 @@ const NeedBox = ({ publicNeed }: { publicNeed: any }) => {
 
       {/* <Nameplate userId={publicNeed?.user_id} /> */}
 
-      <button
+      {/* <button
         className="flex text-center align-bottom neo-button"
         onClick={() => console.log("add to my page")}
       >
         Add to my page
-      </button>
+      </button> */}
     </div>
   );
 };

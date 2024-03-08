@@ -16,8 +16,8 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <div className="w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+    <div className="w-full flex flex-col 10 items-center">
+      <nav className="px-6 w-full flex justify-center border-b border-b-foreground/10 h-16">
         <div className="w-full flex justify-between items-center p-3 text-sm ">
           <div className="flex items-center gap-4 text-xl">STATE OF HEALTH</div>
           <Nameplate userId={user.id} />
