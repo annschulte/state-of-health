@@ -26,7 +26,7 @@ export default async function Index() {
         </div>
       </nav>
 
-      <div className="animate-in flex-1 flex flex-col gap-1s0 opacity-0 px-3">
+      <div className="animate-in flex-1 flex flex-col gap-10 opacity-0 px-3">
         <main className="flex-1 flex flex-col gap-6">
           <PublicNeedsList />
         </main>
