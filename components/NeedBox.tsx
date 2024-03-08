@@ -6,7 +6,6 @@ import MehVote from "./MehVote";
 import DownVote from "./DownVote";
 
 export const NeedBox = ({ need }: NeedBoxProps) => {
-  const today = new Date().toISOString().slice(0, 10);
   const { setVoteStatusForNeed, voteStatuses } = useStore();
   const [localCheckIn, setLocalCheckIn] = useState<any>(undefined);
 
@@ -34,14 +33,9 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
     };
 
     fetchVoteStatus();
-  }, [need?.need_id, setVoteStatusForNeed, today]);
+  }, [need?.need_id, setVoteStatusForNeed]);
 
   const handleVote = async (newVote: "green" | "yellow" | "red") => {
-    // if (localVoteStatus) {
-    //   alert("You have already voted for this need today.");
-    //   return;
-    // }
-
     setVoteStatusForNeed(need?.need_id, newVote);
     setLocalCheckIn({ created_at: new Date(), status: newVote });
 
@@ -50,7 +44,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
         need_id: need?.need_id,
         user_id: (await supabase.auth.getUser()).data.user?.id,
         status: newVote,
-        date: today,
+        date: new Date().toISOString().slice(0, 10),
       },
     ]);
 
@@ -69,13 +63,14 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
     <div className={getCardClassName()}>
       <div className="h-full flex flex-col justify-between">
         <div className="need-title">{need?.title?.toUpperCase()}</div>
-        <div className="flex flex-row justify-between">
-          <div className="need-date">{need?.description}</div>
-          <div className="need-date">
-            {localCheckIn?.created_at
-              ? new Date(localCheckIn?.created_at).toLocaleTimeString()
-              : " "}
-          </div>
+
+        <div className="need-date">{need?.description}</div>
+        <div className="need-date">
+          {localCheckIn?.created_at
+            ? new Date(localCheckIn?.created_at).toLocaleTimeString() +
+              " " +
+              new Date(localCheckIn?.created_at).toLocaleDateString()
+            : " "}
         </div>
 
         <div className="vote-buttons">
