@@ -7,7 +7,12 @@ import DownVote from "./DownVote";
 
 export const NeedBox = ({ need }: NeedBoxProps) => {
   const { setVoteStatusForNeed, voteStatuses } = useStore();
-  const [localCheckIn, setLocalCheckIn] = useState<any>(undefined);
+  const [checkIn, setCheckIn] = useState<any>(undefined);
+  const [voteLengths, setVoteLengths] = useState<any>({
+    good: 0,
+    meh: 0,
+    bad: 0,
+  });
 
   useEffect(() => {
     const fetchVoteStatus = async () => {
@@ -18,8 +23,18 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
         .select("*")
         .eq("need_id", need?.need_id)
         .eq("user_id", user?.user?.id)
-        .order("created_at", { ascending: false })
-        .limit(1);
+        .order("created_at", { ascending: false });
+
+      const goodLength = existingCheckIn?.filter(
+        (checkin: any) => checkin?.status === "green"
+      ).length;
+      const mehLength = existingCheckIn?.filter(
+        (checkin: any) => checkin?.status === "yellow"
+      ).length;
+
+      const badLength = existingCheckIn?.filter(
+        (checkin: any) => checkin?.status === "red"
+      ).length;
 
       if (existingVotesError) {
         console.error("Error fetching vote status:", existingVotesError);
@@ -28,7 +43,13 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
 
       if (existingCheckIn && existingCheckIn?.length > 0) {
         setVoteStatusForNeed(need?.need_id, existingCheckIn[0].status);
-        setLocalCheckIn(existingCheckIn[0]);
+        setCheckIn(existingCheckIn[0]);
+
+        setVoteLengths({
+          good: goodLength,
+          meh: mehLength,
+          bad: badLength,
+        });
       }
     };
 
@@ -36,26 +57,53 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
   }, [need?.need_id, setVoteStatusForNeed]);
 
   const handleVote = async (newVote: "green" | "yellow" | "red") => {
-    setVoteStatusForNeed(need?.need_id, newVote);
-    setLocalCheckIn({ created_at: new Date(), status: newVote });
-
-    const { error } = await supabase.from("checkins").insert([
-      {
-        need_id: need?.need_id,
-        user_id: (await supabase.auth.getUser()).data.user?.id,
-        status: newVote,
-        date: new Date().toISOString().slice(0, 10),
-      },
-    ]);
+    const { data, error } = await supabase
+      .from("checkins")
+      .insert([
+        {
+          need_id: need?.need_id,
+          user_id: (await supabase.auth.getUser()).data.user?.id,
+          status: newVote,
+          date: new Date().toISOString().slice(0, 10),
+        },
+      ])
+      .select("*");
 
     if (error) {
       console.error("Error voting:", error);
       return;
     }
+
+    const goodLength: boolean = data?.filter(
+      (checkin: any) => checkin?.status === "green"
+    ).length
+      ? true
+      : false;
+    const mehLength: boolean = data?.filter(
+      (checkin: any) => checkin?.status === "yellow"
+    ).length
+      ? true
+      : false;
+
+    const badLength: boolean = data?.filter(
+      (checkin: any) => checkin?.status === "red"
+    ).length
+      ? true
+      : false;
+
+    if (data) {
+      setCheckIn(data[0]);
+      setVoteLengths((prev: any) => ({
+        good: prev.good + goodLength,
+        meh: prev.meh + mehLength,
+        bad: prev.bad + badLength,
+      }));
+      setVoteStatusForNeed(need?.need_id, newVote);
+    }
   };
 
   const getCardClassName = () => {
-    const status = voteStatuses[need?.need_id] ?? localCheckIn?.status;
+    const status = voteStatuses[need?.need_id] ?? checkIn?.status;
     return `need-box ${status ?? ""}`;
   };
 
@@ -66,10 +114,10 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
 
         <div className="need-date">{need?.description}</div>
         <div className="need-date">
-          {localCheckIn?.created_at
-            ? new Date(localCheckIn?.created_at).toLocaleTimeString() +
+          {checkIn?.created_at
+            ? new Date(checkIn?.created_at).toLocaleTimeString() +
               " " +
-              new Date(localCheckIn?.created_at).toLocaleDateString()
+              new Date(checkIn?.created_at).toLocaleDateString()
             : " "}
         </div>
 
@@ -83,6 +131,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
                 voteStatuses[need?.need_id] === "green" ? "#00FF75" : "white"
               }
             />
+            {voteLengths?.good}
           </button>
           <button
             className={voteStatuses[need?.need_id] === "yellow" ? "voted" : ""}
@@ -93,6 +142,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
                 voteStatuses[need?.need_id] === "yellow" ? "#FFB443" : "white"
               }
             />
+            {voteLengths?.meh}
           </button>
           <button
             className={voteStatuses[need?.need_id] === "red" ? "voted" : ""}
@@ -101,6 +151,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
             <DownVote
               fill={voteStatuses[need?.need_id] === "red" ? "red" : "white"}
             />
+            {voteLengths?.bad}
           </button>
         </div>
         {/* <button className="neo-button">GO AWAY!</button> */}
