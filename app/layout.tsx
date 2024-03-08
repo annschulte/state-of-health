@@ -1,5 +1,11 @@
-import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+
+import { Archivo } from "next/font/google";
+
+const firaMono = Archivo({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -7,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "State of Health",
+  description: "Monitor your life with State of Health",
 };
 
 export default function RootLayout({
@@ -17,9 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en">
       <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
+        <main
+          className={`${firaMono.className} min-h-screen flex flex-col items-center`}
+        >
           {children}
         </main>
       </body>
