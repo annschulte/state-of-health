@@ -14,8 +14,8 @@ export default function K() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,12 +24,12 @@ export default function K() {
         height="34"
         fill="#DD7DFF"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M28 12L16 22" stroke="black" stroke-width="4" />
-      <path d="M28 32L16 22" stroke="black" stroke-width="4" />
-      <path d="M16 34L16 10" stroke="black" stroke-width="4" />
+      <path d="M28 12L16 22" stroke="black" strokeWidth="4" />
+      <path d="M28 32L16 22" stroke="black" strokeWidth="4" />
+      <path d="M16 34L16 10" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

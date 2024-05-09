@@ -1,6 +1,6 @@
 import "./globals.css";
-
 import { Archivo } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 
 const firaMono = Archivo({
   subsets: ["latin"],

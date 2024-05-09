@@ -1,21 +1,58 @@
 "use client";
 
 import { supabase } from "@/utils/supabase/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox } from "./CheckBox";
 import { useStore } from "@/store";
+import { MultiSelect } from "./MultiSelect";
+import { useUser } from "@/hooks/useUser";
 
 export const NeedCreate = () => {
   const addNeed = useStore((state) => state.addNeed);
+  const { user } = useUser();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedTags, setSelectedTags] = useState<any>([]);
+  const [allTags, setAllTags] = useState<any>([]);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [selectedBoardId, setSelectedBoardId] = useState("");
+  const [boards, setBoards] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      const { data, error } = await supabase
+        .from("boards")
+        .select("*")
+        .eq("created_by_user_id", user?.id);
+      if (error) {
+        console.error("Error fetching boards:", error);
+      } else {
+        setBoards(data);
+      }
+    };
+
+    fetchBoards();
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchTags = async () => {
+  //     const { data, error } = await supabase.from("Tags").select("*");
+  //     if (error) {
+  //       console.error("Error fetching tags:", error);
+  //     } else {
+  //       setAllTags(data);
+  //     }
+  //   };
+
+  //   fetchTags();
+  // }, []);
 
   const handleCreateNeed = async () => {
     if (!title || !description) {
       alert("Please fill out all fields");
       return;
     }
+
     const { data, error } = await supabase
       .from("needs")
       .insert([
@@ -23,7 +60,7 @@ export const NeedCreate = () => {
           title,
           description,
           weight: 0,
-          user_id: (await supabase.auth.getSession()).data.session?.user.id,
+          user_id: user?.id,
           is_public: !isPrivate,
         },
       ])
@@ -33,10 +70,33 @@ export const NeedCreate = () => {
       console.error("Error creating need:", error);
       return;
     }
-    if (data) {
-      addNeed(data[0]);
-    }
+    // if (data) {
+    //   const needId = data[0].need_id;
+    //   const needsTagsData = selectedTags.map((tagId: number) => ({
+    //     need_id: needId,
+    //     tag_id: tagId,
+    //   }));
+    //   const { error: needsTagsError } = await supabase
+    //     .from("NeedsTags")
+    //     .insert(needsTagsData);
+
+    //   if (needsTagsError) {
+    //     console.error("Error associating tags with need:", needsTagsError);
+    //     return;
+    //   }
+    //   addNeed({ ...data[0], tags: selectedTags });
+    // }
   };
+
+  // const handleSelectTags = (selectedTags: any) => {
+  //   setSelectedTags(selectedTags);
+  // };
+
+  const handleSelectBoards = (selectedBoards: any) => {
+    setSelectedBoardId(selectedBoards);
+  };
+
+  // const tags = ["Work", "Personal"];
 
   return (
     <div className="need-creator">
@@ -56,10 +116,11 @@ export const NeedCreate = () => {
           onChange={(e) => setDescription(e.target.value)}
           required
         />
+        {/* <MultiSelect tags={tags} onSelectTags={handleSelectTags} /> */}
+        <MultiSelect tags={boards} onSelectTags={handleSelectBoards} />
       </div>
 
       <Checkbox label="Private" value={isPrivate} setValue={setIsPrivate} />
-
       <button className="neo-button" onClick={handleCreateNeed}>
         Create
       </button>

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase/client";
 import { useStore } from "@/store";
 import UpVote from "./UpVote";
-import MehVote from "./MehVote";
 import DownVote from "./DownVote";
 
 export const NeedBox = ({ need }: NeedBoxProps) => {
@@ -110,10 +109,10 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
   return (
     <div className={getCardClassName()}>
       <div className="h-full flex flex-col justify-between">
-        <div className="need-title">{need?.title?.toUpperCase()}</div>
+        <div style={needTitleStyle}>{need?.title?.toUpperCase()}</div>
 
-        <div className="need-date">{need?.description}</div>
-        <div className="need-date">
+        <div style={needContent}>{need?.description}</div>
+        <div style={needContent}>
           {checkIn?.created_at
             ? new Date(checkIn?.created_at).toLocaleTimeString() +
               " " +
@@ -133,7 +132,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
             />
             {voteLengths?.good}
           </button>
-          <button
+          {/* <button
             className={voteStatuses[need?.need_id] === "yellow" ? "voted" : ""}
             onClick={() => handleVote("yellow")}
           >
@@ -143,7 +142,7 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
               }
             />
             {voteLengths?.meh}
-          </button>
+          </button> */}
           <button
             className={voteStatuses[need?.need_id] === "red" ? "voted" : ""}
             onClick={() => handleVote("red")}
@@ -158,4 +157,17 @@ export const NeedBox = ({ need }: NeedBoxProps) => {
       </div>
     </div>
   );
+};
+
+const needTitleStyle = {
+  fontWeight: "string",
+  color: "black",
+  marginBottom: "8px",
+  fontSize: "1.2rem",
+};
+
+const needContent = {
+  color: "black",
+  fontSize: "0.85em",
+  marginBottom: "12px",
 };

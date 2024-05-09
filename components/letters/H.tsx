@@ -14,8 +14,8 @@ export default function H() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,12 +24,12 @@ export default function H() {
         height="34"
         fill="#FF5E5E"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M28 21L16 21" stroke="black" stroke-width="4" />
-      <path d="M28 34L28 10" stroke="black" stroke-width="4" />
-      <path d="M16 34L16 10" stroke="black" stroke-width="4" />
+      <path d="M28 21L16 21" stroke="black" strokeWidth="4" />
+      <path d="M28 34L28 10" stroke="black" strokeWidth="4" />
+      <path d="M16 34L16 10" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

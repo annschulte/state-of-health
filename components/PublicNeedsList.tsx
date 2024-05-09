@@ -65,18 +65,23 @@ const NeedBox = ({ publicNeed }: { publicNeed: any }) => {
   return (
     <div className="need-box" key={publicNeed?.need_id}>
       <div className="h-full flex flex-col justify-between">
-        <div className="need-title">{publicNeed?.title?.toUpperCase()}</div>
-        <div className="need-date">{publicNeed?.description}</div>
+        <div style={needTitleStyle}>{publicNeed?.title?.toUpperCase()}</div>
+        <div style={needContent}>{publicNeed?.description}</div>
 
         <Nameplate userId={publicNeed?.user_id} />
-
-        {/* <button
-        className="flex text-center align-bottom neo-button"
-        onClick={() => console.log("add to my page")}
-      >
-        Add to my page
-      </button> */}
       </div>
     </div>
   );
+};
+const needTitleStyle = {
+  fontWeight: "string",
+  color: "black",
+  marginBottom: "8px",
+  fontSize: "1.2rem",
+};
+
+const needContent = {
+  color: "black",
+  fontSize: "0.85em",
+  marginBottom: "12px",
 };

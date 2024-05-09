@@ -24,6 +24,36 @@ export const useStore = create<NeedState>((set: any) => ({
     })),
 }));
 
+interface ActivityState {
+  activities: Activity[];
+  addActivity: (newActivity: Activity | any) => void;
+  setActivities: (activities: Activity[] | any) => void;
+  voteStatuses: Record<string, "green" | "yellow" | "red">;
+  setVoteStatusForActivity: (
+    needId: string,
+    voteStatus: "green" | "yellow" | "red"
+  ) => void;
+}
+
+export interface Activity {
+  id: string;
+  item: string;
+  date: string;
+  user_id: string;
+}
+
+export const useActivitiesStore = create<ActivityState>((set: any) => ({
+  activities: [],
+  setActivities: (activities: Activity[]) => set({ activities }),
+  addActivity: (newActivity: Activity) =>
+    set((state: any) => ({ activities: [...state.activities, newActivity] })),
+  voteStatuses: {},
+  setVoteStatusForActivity: (activityId, voteStatus) =>
+    set((state: any) => ({
+      voteStatuses: { ...state.voteStatuses, [activityId]: voteStatus },
+    })),
+}));
+
 interface PublicNeedState {
   publicNeeds: Need[];
   setPublicNeeds: (publicNeeds: Need[]) => void;

@@ -14,8 +14,8 @@ export default function U() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,13 +24,13 @@ export default function U() {
         height="34"
         fill="#39DBFF"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <path
         d="M15 10V22C15 27.5228 15.4772 32 22 32C28.5228 32 29 27.5228 29 22V10"
         stroke="black"
-        stroke-width="4"
+        strokeWidth="4"
       />
     </svg>
   );

@@ -14,8 +14,8 @@ export default function J() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,15 +24,15 @@ export default function J() {
         height="34"
         fill="#FFF500"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <path
         d="M16 28C16 30.7091 17.7909 32 20 32C22.2091 32 24 30.7091 24 28L24 10"
         stroke="black"
-        stroke-width="4"
+        strokeWidth="4"
       />
-      <path d="M28 12L20 12" stroke="black" stroke-width="4" />
+      <path d="M28 12L20 12" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

@@ -14,8 +14,8 @@ export default function O() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,13 +24,13 @@ export default function O() {
         height="34"
         fill="#39DBFF"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <path
         d="M22 32C28.5228 32 29 27.5228 29 22C29 16.4772 28.5228 12 22 12C15.4772 12 15 16.4772 15 22C15 27.5228 15.4772 32 22 32Z"
         stroke="black"
-        stroke-width="4"
+        strokeWidth="4"
       />
     </svg>
   );

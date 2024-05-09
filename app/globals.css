@@ -80,20 +80,6 @@ body {
   box-shadow: 8px 8px 0 rgba(95, 55, 250);
 }
 
-.need-title {
-  font-weight: 800;
-  color: black;
-  margin-bottom: 8px;
-  font-size: 1rem;
-  font-variant: small-caps;
-}
-
-.need-date {
-  color: black;
-  font-size: 0.85em;
-  margin-bottom: 12px;
-}
-
 .vote-buttons {
   display: flex;
   justify-content: space-between;
@@ -256,4 +242,61 @@ body {
   border: solid #fff;
   border-width: 0 4px 4px 0;
   transform: rotate(45deg);
+}
+
+/* EmojiPickerStyles.css */
+.emoji-mart {
+  font-family: "Arial", sans-serif; /* Simple and stark font */
+  background-color: #d9d9d9; /* Concrete-like background */
+  border: 2px solid black; /* Strong, pronounced borders */
+  box-shadow: none; /* Remove any modern styling like shadows */
+}
+
+.emoji-mart-bar {
+  background-color: #bbbbbb; /* Different shade for the toolbar */
+  border-bottom: 2px solid black;
+}
+
+em-emoji-picker {
+  border: 2px solid black;
+  border-radius: 0;
+}
+
+/* EmojiPickerStyles.css */
+.emoji-mart {
+  font-family: "Arial", sans-serif; /* Simple and stark font */
+  background-color: #d9d9d9; /* Concrete-like background */
+  border: 3px solid black; /* Strong, pronounced borders */
+}
+
+.emoji-mart-bar {
+  background-color: #bbbbbb;
+  border-bottom: 3px solid black;
+}
+
+.emoji-mart-emoji:hover {
+  background-color: transparent; /* Remove hover effects */
+}
+
+.emoji-mart-category-label span {
+  background-color: #bbbbbb;
+  color: black;
+}
+
+.emoji-mart-search input {
+  background-color: #eeeeee;
+  border: 3px solid black;
+}
+
+.emoji-mart-search-icon svg {
+  fill: black; /* Solid, stark icon color */
+}
+
+.emoji-mart-anchor {
+  color: black; /* High contrast for visibility */
+}
+
+.emoji-mart-anchor-selected {
+  color: white;
+  background-color: black;
 }

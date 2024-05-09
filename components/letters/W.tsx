@@ -14,8 +14,8 @@ export default function W() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,13 +24,13 @@ export default function W() {
         height="34"
         fill="#DD7DFF"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M26 33L22 19" stroke="black" stroke-width="4" />
-      <path d="M26 33L32 11" stroke="black" stroke-width="4" />
-      <path d="M18 33L22 19" stroke="black" stroke-width="4" />
-      <path d="M18 33L12 11" stroke="black" stroke-width="4" />
+      <path d="M26 33L22 19" stroke="black" strokeWidth="4" />
+      <path d="M26 33L32 11" stroke="black" strokeWidth="4" />
+      <path d="M18 33L22 19" stroke="black" strokeWidth="4" />
+      <path d="M18 33L12 11" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

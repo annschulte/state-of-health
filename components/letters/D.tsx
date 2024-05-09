@@ -14,8 +14,8 @@ export default function D() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,15 +24,15 @@ export default function D() {
         height="34"
         fill="#00FF75"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <path
         d="M16 32H18C25.5228 32 28 27.5228 28 22C28 16.4772 25.5228 12 18 12H16"
         stroke="black"
-        stroke-width="4"
+        strokeWidth="4"
       />
-      <path d="M16 34L16 10" stroke="black" stroke-width="4" />
+      <path d="M16 34L16 10" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

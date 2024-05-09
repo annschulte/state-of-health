@@ -14,8 +14,8 @@ export default function M() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,13 +24,13 @@ export default function M() {
         height="34"
         fill="#FF5E5E"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M28 11L22 25" stroke="black" stroke-width="4" />
-      <path d="M28 11L30 33" stroke="black" stroke-width="4" />
-      <path d="M16 11L22 25" stroke="black" stroke-width="4" />
-      <path d="M16 11L14 33" stroke="black" stroke-width="4" />
+      <path d="M28 11L22 25" stroke="black" strokeWidth="4" />
+      <path d="M28 11L30 33" stroke="black" strokeWidth="4" />
+      <path d="M16 11L22 25" stroke="black" strokeWidth="4" />
+      <path d="M16 11L14 33" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

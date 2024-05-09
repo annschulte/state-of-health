@@ -1,6 +1,8 @@
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { PublicNeedsList } from "@/components/PublicNeedsList";
+import { Calendar } from "@/components/Calendar";
+import Link from "next/link";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -26,13 +28,17 @@ export default async function Index() {
         </div>
       </nav>
 
-      <div className="animate-in flex-1 flex flex-col gap-10 opacity-0 px-3">
-        <main className="flex-1 flex flex-col gap-6">
-          <PublicNeedsList />
+      <div className="w-full animate-in flex-1 flex flex-col gap-10 opacity-0">
+        <main className="w-full flex-1 flex flex-col">
+          {/* <PublicNeedsList /> */}
+          {/* <Calendar user={user} /> */}
         </main>
       </div>
 
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs"></footer>
+      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
+        Made with ❤️
+        {/* <Link href="https://annschulteportfolio.vercel.app"> Ann</Link> */}
+      </footer>
     </div>
   );
 }

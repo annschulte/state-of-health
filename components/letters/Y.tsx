@@ -14,8 +14,8 @@ export default function Y() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,12 +24,12 @@ export default function Y() {
         height="34"
         fill="#FF5E5E"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M22 21L30 11" stroke="black" stroke-width="4" />
-      <path d="M22 21L14 11" stroke="black" stroke-width="4" />
-      <path d="M22 35L22 21" stroke="black" stroke-width="4" />
+      <path d="M22 21L30 11" stroke="black" strokeWidth="4" />
+      <path d="M22 21L14 11" stroke="black" strokeWidth="4" />
+      <path d="M22 35L22 21" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

@@ -14,8 +14,8 @@ export default function UpVote({ fill = "#00FF75" }) {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,11 +24,11 @@ export default function UpVote({ fill = "#00FF75" }) {
         height="34"
         fill={fill}
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M14 21L22 13L30 21" stroke="black" stroke-width="4" />
-      <path d="M22 13L22 34" stroke="black" stroke-width="4" />
+      <path d="M14 21L22 13L30 21" stroke="black" strokeWidth="4" />
+      <path d="M22 13L22 34" stroke="black" strokeWidth="4" />
     </svg>
   );
 }

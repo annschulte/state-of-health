@@ -14,8 +14,8 @@ export default function z() {
         height="34"
         fill="black"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <rect
         x="5"
@@ -24,12 +24,12 @@ export default function z() {
         height="34"
         fill="#FFB443"
         stroke="black"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
-      <path d="M28 12L16 12" stroke="black" stroke-width="4" />
-      <path d="M28 32L16 32" stroke="black" stroke-width="4" />
-      <path d="M16 32L28 12" stroke="black" stroke-width="4" />
+      <path d="M28 12L16 12" stroke="black" strokeWidth="4" />
+      <path d="M28 32L16 32" stroke="black" strokeWidth="4" />
+      <path d="M16 32L28 12" stroke="black" strokeWidth="4" />
     </svg>
   );
 }
