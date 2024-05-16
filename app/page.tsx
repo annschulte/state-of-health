@@ -1,8 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import AuthButton from "../components/AuthButton";
 import { supabase } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
-import { Calendar } from "@/components/Calendar";
 import { Fragment } from "react";
 
 export default async function Index() {
