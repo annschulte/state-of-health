@@ -39,7 +39,7 @@ export default async function Index() {
               </p>
             </div>
             <div className="w-full flex justify-center items-center flex-col gap-4">
-              <AuthButton />
+              {/* <AuthButton /> */}
             </div>
           </Fragment>
         </main>
