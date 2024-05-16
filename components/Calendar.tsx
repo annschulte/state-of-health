@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { Modal } from "./Modal";
 import { supabase } from "../utils/supabase/client";
 import { Activity, useActivitiesStore } from "@/store";
+import { useUser } from "@/hooks/useUser";
 
 interface DayProps {
   day: number | null;
   view: string;
-
   monthStart?: string;
   fullDate?: Date;
   extraStyle?: React.CSSProperties;
@@ -71,9 +71,9 @@ const Day: React.FC<DayProps> = ({
     >
       <span className="absolute top-1 left-1 text-xs">{monthStart}</span>
       <p className="absolute top-3 left-2 text-lg font-bold">{day}</p>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-wrap justify-center items-center">
         {activities.map((activity) => (
-          <div key={activity.id}>
+          <div className="m-1" key={activity.id}>
             <span>{activity.item}</span>
           </div>
         ))}
@@ -99,7 +99,8 @@ const monthColors = [
   "bg-cyan-500",
 ];
 
-export const Calendar = ({ user }: { user: any }) => {
+export const Calendar = () => {
+  const { user } = useUser();
   const { activities, setActivities } = useActivitiesStore();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState("month");
@@ -108,7 +109,7 @@ export const Calendar = ({ user }: { user: any }) => {
     const { data, error } = await supabase
       .from("activities")
       .select("*")
-      .eq("user_id", user.id);
+      .eq("user_id", user?.id);
 
     if (error) {
       console.error("Error fetching activities:", error);
@@ -119,8 +120,10 @@ export const Calendar = ({ user }: { user: any }) => {
   };
 
   useEffect(() => {
-    fetchActivities();
-  }, []);
+    if (user) {
+      fetchActivities();
+    }
+  }, [user]);
 
   if (!activities || !user) {
     return "loading...";
@@ -157,7 +160,7 @@ export const Calendar = ({ user }: { user: any }) => {
             : undefined,
         isPrevMonth: false,
         view: "month",
-        activities: activities.filter(
+        activities: activities?.filter(
           (activity) =>
             activity.date === formatDate(new Date(year, month, i + 1))
         ),
@@ -175,11 +178,11 @@ export const Calendar = ({ user }: { user: any }) => {
 
       days.push({
         day: newDate.getDate(),
-        // color: monthColors[newDate.getMonth()],
+
         view: "week",
         monthStart: newDate.toLocaleDateString("en-US", { month: "long" }),
         fullDate: newDate,
-        activities: activities.filter(
+        activities: activities?.filter(
           (activity) => activity.date === newDate.toISOString()
         ),
       });
@@ -219,7 +222,6 @@ export const Calendar = ({ user }: { user: any }) => {
             day={day.day}
             view={view}
             monthStart={day.monthStart}
-            // color={day.color}
             fullDate={day.fullDate}
             activities={day.activities}
           />

@@ -15,7 +15,7 @@ export const EmojiPicker: React.FC<EmojiPickerProps> = ({ onEmojiSelect }) => {
     <Picker
       showPreview={false}
       showSkinTones={false}
-      onSelect={handleEmojiSelect}
+      onEmojiSelect={handleEmojiSelect}
       title="Pick your emoji…"
       emoji="point_up"
       style={{ borderRadius: 0 }}

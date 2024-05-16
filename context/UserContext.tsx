@@ -16,7 +16,6 @@ export const UserProvider: React.FC<{
   initialUser?: User;
 }> = ({ children, initialUser }) => {
   const [user, setUser] = useState<User | null>(initialUser || null);
-  // Assume session management remains client-side for simplicity
 
   return (
     <UserContext.Provider value={{ user, setUser, session: null }}>

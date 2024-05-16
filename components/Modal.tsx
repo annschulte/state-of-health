@@ -4,26 +4,29 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { EmojiPicker } from "./EmojiPicker";
 import { useUser } from "@/hooks/useUser";
+import { useActivitiesStore } from "@/store";
 
 export function Modal({ fullDate }: { fullDate: Date | undefined }) {
   const { user } = useUser();
-  let [isOpen, setIsOpen] = useState(false);
+  const { addActivity } = useActivitiesStore();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleEmojiSelect = async (emoji: string) => {
-    console.log(emoji);
-
+    setIsOpen(false);
+    const activity = {
+      item: emoji,
+      user_id: user?.id,
+      date: fullDate?.toISOString(),
+    };
     const { data, error } = await supabase
       .from("activities")
-      .insert([
-        {
-          item: emoji,
-          user_id: user?.id,
-        },
-      ])
+      .insert([activity])
       .select("*");
-    if (error) {
-      console.error("Error creating need:", error);
-      return;
+
+    if (!error && data) {
+      addActivity(data[0]);
+    } else {
+      console.error("Failed to insert activity:", error.message);
     }
   };
 
