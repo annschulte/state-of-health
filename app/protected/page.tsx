@@ -1,27 +1,28 @@
+"use client";
+
 import { supabase } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
 import { Nameplate } from "@/components/Nameplate";
 import { UserProvider } from "@/context/UserContext";
 import { Calendar } from "@/components/Calendar";
 
-export default async function ProtectedPage({
-  initialUser,
-}: {
-  initialUser: any;
-}) {
-  if (!initialUser) {
+export default async function ProtectedPage() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
     return redirect("/login");
   }
 
   return (
-    <UserProvider initialUser={initialUser}>
+    <UserProvider initialUser={user}>
       <div className="w-full flex flex-col 10 items-center">
         <nav className="px-6 w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full flex justify-between items-center p-3 text-sm ">
             <div className="flex items-center gap-4 text-xl">
               STATE OF HEALTH
             </div>
-            <Nameplate userId={initialUser.id} />
+            <Nameplate userId={user.id} />
 
             <div className="flex items-center gap-4 text-xl">
               {new Date().toLocaleDateString()}
