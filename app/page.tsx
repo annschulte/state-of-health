@@ -1,8 +1,5 @@
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import { PublicNeedsList } from "@/components/PublicNeedsList";
-import { Calendar } from "@/components/Calendar";
-import Link from "next/link";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
