@@ -1,11 +1,12 @@
-"use client";
-
+import { Nameplate } from "@/components/Nameplate";
 import AuthButton from "../components/AuthButton";
-import { supabase } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { Fragment } from "react";
 
 export default async function Index() {
+  const supabase = createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -18,11 +19,11 @@ export default async function Index() {
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
         <div className="w-full flex justify-between items-center p-3 text-sm ">
           <div className="flex items-center gap-4 text-xl">STATE OF HEALTH</div>
-          {/* <Nameplate userId={user.id} /> */}
+          {user ? <Nameplate userId={user.id} /> : null}
 
           <div className="flex items-center gap-4 text-xl">
             {new Date().toLocaleDateString()}
-            {/* <AuthButton /> */}
+            <AuthButton />
           </div>
         </div>
       </nav>
@@ -39,7 +40,7 @@ export default async function Index() {
               </p>
             </div>
             <div className="w-full flex justify-center items-center flex-col gap-4">
-              {/* <AuthButton /> */}
+              <AuthButton />
             </div>
           </Fragment>
         </main>
