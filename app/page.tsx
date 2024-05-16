@@ -22,7 +22,7 @@ export default async function Index() {
 
           <div className="flex items-center gap-4 text-xl">
             {new Date().toLocaleDateString()}
-            <AuthButton />
+            {/* <AuthButton /> */}
           </div>
         </div>
       </nav>
