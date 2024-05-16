@@ -1,16 +1,18 @@
+import Link from "next/link";
 import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
+import { supabase } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
+import { Calendar } from "@/components/Calendar";
+import { Fragment } from "react";
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
+  if (!user) {
+    return redirect("/login");
+  }
   return (
     <div className="flex-1 w-full flex flex-col gap-10 items-center">
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -27,8 +29,19 @@ export default async function Index() {
 
       <div className="w-full animate-in flex-1 flex flex-col gap-10 opacity-0">
         <main className="w-full flex-1 flex flex-col">
-          {/* <PublicNeedsList /> */}
-          {/* <Calendar user={user} /> */}
+          <Fragment>
+            <div className="w-full flex justify-center items-center flex-col gap-4">
+              <h1 className="text-4xl font-bold">Welcome to State of Health</h1>
+              <p className="text-lg text-center">
+                This is a simple health tracking app that allows you to log your
+                daily health status. You can also view your health history and
+                share it with your doctor.
+              </p>
+            </div>
+            <div className="w-full flex justify-center items-center flex-col gap-4">
+              <AuthButton />
+            </div>
+          </Fragment>
         </main>
       </div>
 
