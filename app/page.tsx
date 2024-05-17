@@ -7,19 +7,20 @@ import { Fragment } from "react";
 export default async function Index() {
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  if (!user) {
-    return redirect("/login");
-  }
+  // if (!user) {
+  //   return redirect("/login");
+  // }
+
   return (
     <div className="flex-1 w-full flex flex-col gap-10 items-center">
       <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
         <div className="w-full flex justify-between items-center p-3 text-sm ">
           <div className="flex items-center gap-4 text-xl">STATE OF HEALTH</div>
-          {user ? <Nameplate userId={user.id} /> : null}
+          {/* {user ? <Nameplate userId={user.id} /> : null} */}
 
           <div className="flex items-center gap-4 text-xl">
             {new Date().toLocaleDateString()}
