@@ -21,7 +21,7 @@ const Day: React.FC<DayProps> = ({
   activities,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const baseStyle = `border border-gray-700 border-2 flex flex-col items-center justify-center w-30  h-24`;
+  const baseStyle = `border border-gray-700 border-2 dark:border-white flex flex-col items-center justify-center w-30  h-24`;
 
   const isCurrentDayFn = (fullDate: Date | undefined): boolean => {
     if (!fullDate) return false;
@@ -59,10 +59,10 @@ const Day: React.FC<DayProps> = ({
     <div
       className={`${baseStyle} ${
         isInPast
-          ? "bg-gray-200"
+          ? "bg-gray-200 dark:bg-gray-700"
           : isCurrentDay
-          ? "bg-blue-200 border-2 border-blue-600"
-          : "bg-white"
+          ? "bg-blue-200 border-2 border-blue-600 dark:bg-blue-700 dark:border-blue-600"
+          : "bg-white dark:bg-gray-700"
       }`}
       style={{ position: "relative", ...extraStyle }}
       onMouseEnter={() => setIsHovered(true)}
@@ -261,7 +261,7 @@ export const Calendar = () => {
         <div className="flex space-x-4">
           <button
             onClick={handlePrev}
-            className="h-12 border-black border-2 p-2.5 bg-[#ffc235] hover:bg-[#ffd36d] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+            className="h-12 border-black dark:border-white border-2 p-2.5 bg-[#ffc235] hover:bg-[#ffd36d] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           >
             Prev
           </button>
@@ -294,10 +294,10 @@ export const Calendar = () => {
           <div>
             <button
               onClick={() => setView("month")}
-              className={`h-12  border-2 p-2.5 border-black mr-2 ${
+              className={`h-12  border-2 p-2.5 border-black dark:border-white mr-2 ${
                 view === "month"
                   ? "bg-[#f129ff] hover:bg-[#f051fe] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
-                  : "bg-[rgb(255,255,255)]  hover:bg-[#5bf4ff] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                  : "bg-[rgb(255,255,255)] dark:bg-[#1f1f1f] hover:bg-[#5bf4ff] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               }`}
             >
               Month
@@ -305,10 +305,10 @@ export const Calendar = () => {
 
             <button
               onClick={() => setView("year")}
-              className={`h-12  border-2 p-2.5 border-black ${
+              className={`h-12  border-2 p-2.5 border-black dark:border-white  ${
                 view === "year"
                   ? "bg-[#f129ff] hover:bg-[#f051fe] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
-                  : "bg-[rgb(255,255,255)]  hover:bg-[#5bf4ff] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                  : "bg-[rgb(255,255,255)] dark:bg-[#1f1f1f]  hover:bg-[#5bf4ff] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
               }`}
             >
               Year
@@ -318,7 +318,7 @@ export const Calendar = () => {
         <div className="flex space-x-4 mb-4 justify-end mt-2">
           <button
             onClick={handleNext}
-            className="h-12 border-black border-2 p-2.5 bg-[#ffc235] hover:bg-[#ffd36d] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+            className="h-12 border-black dark:border-white border-2 p-2.5 bg-[#ffc235] hover:bg-[#ffd36d] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           >
             Next
           </button>
