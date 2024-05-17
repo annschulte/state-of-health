@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Modal } from "./Modal";
-import { supabase } from "../utils/supabase/client";
+import { supabase } from "@/utils/supabase/client";
 import { Activity, useActivitiesStore } from "@/store";
-import { useUser } from "@/hooks/useUser";
 
 interface DayProps {
   day: number | null;
@@ -100,10 +99,18 @@ const monthColors = [
 ];
 
 export const Calendar = () => {
-  const { user } = useUser();
   const { activities, setActivities } = useActivitiesStore();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState("month");
+  const [user, setUser] = useState<any>();
+
+  const fetchUser = async () => {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+    setUser(user);
+  };
 
   const fetchActivities = async () => {
     const { data, error } = await supabase
@@ -120,12 +127,14 @@ export const Calendar = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchActivities();
-    }
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    fetchActivities();
   }, [user]);
 
-  if (!activities || !user) {
+  if (!activities) {
     return "loading...";
   }
 

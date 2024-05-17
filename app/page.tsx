@@ -1,18 +1,18 @@
-import { Nameplate } from "@/components/Nameplate";
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import { Fragment } from "react";
 
 export default async function Index() {
-  const supabase = createClient();
+  const canInitSupabaseClient = () => {
+    try {
+      createClient();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
 
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
-
-  // if (!user) {
-  //   return redirect("/login");
+  const isSupabaseConnected = canInitSupabaseClient();
   // }
 
   return (
@@ -41,7 +41,7 @@ export default async function Index() {
               </p>
             </div>
             <div className="w-full flex justify-center items-center flex-col gap-4">
-              <AuthButton />
+              {isSupabaseConnected && <AuthButton />}
             </div>
           </Fragment>
         </main>

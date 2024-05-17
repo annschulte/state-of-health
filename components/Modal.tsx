@@ -1,15 +1,26 @@
 "use client";
 import { supabase } from "@/utils/supabase/client";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { EmojiPicker } from "./EmojiPicker";
-import { useUser } from "@/hooks/useUser";
 import { useActivitiesStore } from "@/store";
 
 export function Modal({ fullDate }: { fullDate: Date | undefined }) {
-  const { user } = useUser();
   const { addActivity } = useActivitiesStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<any>();
+
+  const fetchUser = async () => {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+    setUser(user);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const handleEmojiSelect = async (emoji: string) => {
     setIsOpen(false);
